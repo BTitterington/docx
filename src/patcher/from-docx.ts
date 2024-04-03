@@ -23,6 +23,7 @@ type InputDataType = Buffer | string | number[] | Uint8Array | ArrayBuffer | Blo
 export const PatchType = {
     DOCUMENT: "file",
     PARAGRAPH: "paragraph",
+    JSON: "json",
 } as const;
 
 type ParagraphPatch = {
@@ -35,6 +36,11 @@ type FilePatch = {
     readonly children: readonly FileChild[];
 };
 
+type JSONPatch = {
+    readonly type: typeof PatchType.JSON;
+    readonly children: readonly Element[];
+};
+
 interface IImageRelationshipAddition {
     readonly key: string;
     readonly mediaDatas: readonly IMediaData[];
@@ -45,7 +51,7 @@ interface IHyperlinkRelationshipAddition {
     readonly hyperlink: { readonly id: string; readonly link: string };
 }
 
-export type IPatch = ParagraphPatch | FilePatch;
+export type IPatch = ParagraphPatch | FilePatch | JSONPatch;
 
 export interface PatchDocumentOptions {
     readonly patches: { readonly [key: string]: IPatch };

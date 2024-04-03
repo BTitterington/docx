@@ -23,13 +23,17 @@ export const replacer = (
     keepOriginalStyles: boolean = false,
 ): Element => {
     for (const renderedParagraph of renderedParagraphs) {
-        const textJson = patch.children
-            // eslint-disable-next-line no-loop-func
-            .map((c) => toJson(xml(formatter.format(c as XmlComponent, context))))
-            .map((c) => c.elements![0]);
+        const textJson: readonly Element[] =
+            patch.type === PatchType.JSON
+                ? patch.children
+                : patch.children
+                      // eslint-disable-next-line no-loop-func
+                      .map((c) => toJson(xml(formatter.format(c as XmlComponent, context))))
+                      .map((c) => c.elements![0]);
 
         switch (patch.type) {
-            case PatchType.DOCUMENT: {
+            case PatchType.DOCUMENT:
+            case PatchType.JSON:{
                 const parentElement = goToParentElementFromPath(json, renderedParagraph.path);
                 const elementIndex = getLastElementIndexFromPath(renderedParagraph.path);
                 // eslint-disable-next-line functional/immutable-data, prefer-destructuring
