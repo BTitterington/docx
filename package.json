@@ -17,6 +17,9 @@
     "files": [
         "build"
     ],
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "build": "tsc && vite build",
         "test": "vitest --ui --coverage",
