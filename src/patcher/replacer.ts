@@ -33,7 +33,7 @@ export const replacer = (
 
         switch (patch.type) {
             case PatchType.DOCUMENT:
-            case PatchType.JSON:{
+            case PatchType.JSON: {
                 const parentElement = goToParentElementFromPath(json, renderedParagraph.path);
                 const elementIndex = getLastElementIndexFromPath(renderedParagraph.path);
                 // eslint-disable-next-line functional/immutable-data, prefer-destructuring
