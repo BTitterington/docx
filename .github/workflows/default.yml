@@ -25,11 +25,6 @@ jobs:
               run: npm ci --force
             - name: Test
               run: npm run test:ci
-            - name: Codecov
-              uses: codecov/codecov-action@v3
-              with:
-                  fail_ci_if_error: true
-                  verbose: true
     lint:
         name: Lint
         runs-on: ubuntu-latest
